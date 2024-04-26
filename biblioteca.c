@@ -1,5 +1,6 @@
 #include "biblioteca.h"
 #include <stdio.h>
+#include <string.h>
 
 void adicionar_contato(struct Contato lista_contatos[], int *total_contatos) {
     if (*total_contatos < 255) {
@@ -26,4 +27,22 @@ void listar_contatos(struct Contato lista_contatos[], int total_contatos) {
         printf("Email: %s\n", lista_contatos[i].email);
         printf("Telefone: %s\n\n", lista_contatos[i].telefone);
     }
+}
+
+void deletar_contato(struct Contato lista_contatos[], int *total_contatos, char telefone[]) {
+    int i, j;
+    for (i = 0; i < *total_contatos; i++) {
+        if (strcmp(lista_contatos[i].telefone, telefone) == 0) {
+            for (j = i; j < *total_contatos - 1; j++) {
+                strcpy(lista_contatos[j].nome, lista_contatos[j + 1].nome);
+                strcpy(lista_contatos[j].sobrenome, lista_contatos[j + 1].sobrenome);
+                strcpy(lista_contatos[j].email, lista_contatos[j + 1].email);
+                strcpy(lista_contatos[j].telefone, lista_contatos[j + 1].telefone);
+            }
+            (*total_contatos)--;
+            printf("Contato deletado com sucesso!\n");
+            return;
+        }
+    }
+    printf("Contato nao encontrado.\n");
 }
