@@ -70,3 +70,4 @@ void carregar_agenda(struct Contato lista_contatos[], int *total_contatos, char 
     fclose(arquivo);
     printf("Agenda carregada com sucesso!\n");
 }
+//revisado

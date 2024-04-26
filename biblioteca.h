@@ -15,3 +15,4 @@ void salvar_agenda(struct Contato lista_contatos[], int total_contatos, char *no
 void carregar_agenda(struct Contato lista_contatos[], int *total_contatos, char *nome_arquivo);
 
 #endif
+//revisado
