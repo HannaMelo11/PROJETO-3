@@ -46,3 +46,27 @@ void deletar_contato(struct Contato lista_contatos[], int *total_contatos, char 
     }
     printf("Contato nao encontrado.\n");
 }
+
+void salvar_agenda(struct Contato lista_contatos[], int total_contatos, char *nome_arquivo) {
+    FILE *arquivo = fopen(nome_arquivo, "wb");
+    if (arquivo == NULL) {
+        printf("Erro ao abrir o arquivo para escrita.\n");
+        return;
+    }
+    fwrite(&total_contatos, sizeof(int), 1, arquivo);
+    fwrite(lista_contatos, sizeof(struct Contato), total_contatos, arquivo);
+    fclose(arquivo);
+    printf("Agenda salva com sucesso!\n");
+}
+
+void carregar_agenda(struct Contato lista_contatos[], int *total_contatos, char *nome_arquivo) {
+    FILE *arquivo = fopen(nome_arquivo, "rb");
+    if (arquivo == NULL) {
+        printf("Erro ao abrir o arquivo para leitura.\n");
+        return;
+    }
+    fread(total_contatos, sizeof(int), 1, arquivo);
+    fread(lista_contatos, sizeof(struct Contato), *total_contatos, arquivo);
+    fclose(arquivo);
+    printf("Agenda carregada com sucesso!\n");
+}
