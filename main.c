@@ -12,9 +12,10 @@ int main() {
         printf("1. Adicionar contato\n");
         printf("2. Listar contatos\n");
         printf("3. Deletar contato\n");
-        printf("4. Salvar agenda\n");
-        printf("5. Carregar agenda\n");
-        printf("6. Sair\n");
+        printf("4. Modificar contato\n");
+        printf("5. Salvar agenda\n");
+        printf("6. Carregar agenda\n");
+        printf("7. Sair\n");
         printf("Escolha uma opcao: ");
         scanf(" %c", &opcao);
 
@@ -39,22 +40,32 @@ int main() {
                 }
                 break;
             case '4':
+                if (total_contatos > 0) {
+                    printf("\nDigite o telefone do contato a ser modificado: ");
+                    char telefone_mod[15];
+                    scanf("%s", telefone_mod);
+                    modificar_contato(lista_contatos, total_contatos, telefone_mod);
+                } else {
+                    printf("\nA lista de contatos esta vazia.\n");
+                }
+                break;
+            case '5':
                 printf("\nDigite o nome do arquivo para salvar a agenda: ");
                 scanf("%s", nome_arquivo);
                 salvar_agenda(lista_contatos, total_contatos, nome_arquivo);
                 break;
-            case '5':
+            case '6':
                 printf("\nDigite o nome do arquivo para carregar a agenda: ");
                 scanf("%s", nome_arquivo);
                 carregar_agenda(lista_contatos, &total_contatos, nome_arquivo);
                 break;
-            case '6':
+            case '7':
                 printf("\nSaindo do programa.\n");
                 break;
             default:
                 printf("\nOpcao invalida. Tente novamente.\n");
         }
-    } while (opcao != '6');
+    } while (opcao != '7');
 
     return 0;
 }
