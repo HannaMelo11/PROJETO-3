@@ -14,3 +14,9 @@ Funcionalidades:
 •Salvar Agenda: Permite ao usuário salvar a lista de contatos em um arquivo para que possa ser recuperada posteriormente.
 
 •Carregar Agenda: Permite ao usuário carregar uma lista de contatos previamente salva de um arquivo.
+
+•Agora tem como modificar os dados do contatos que já estar na lista
+
+•Tem um verificador de email para ver se realmente é um email que estar na lista
+
+•tmb tem uma funcionalidade de nao deixar ultilizar o mesmo numero no contato e nem ultilizar letras no telefone
