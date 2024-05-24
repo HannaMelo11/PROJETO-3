@@ -75,6 +75,14 @@ void adicionar_contato(struct Contato lista_contatos[], int *total_contatos) {
                     break;
                 }
             }
+            // Verificar se o telefone já existe na lista de contatos
+            for (int i = 0; i < *total_contatos; i++) {
+                if (strcmp(lista_contatos[i].telefone, telefone) == 0) {
+                    valid = 0;
+                    printf("Este telefone ja esta em uso. Tente novamente.\n");
+                    break;
+                }
+            }
         }
         strcpy(lista_contatos[*total_contatos].telefone, telefone);
 
