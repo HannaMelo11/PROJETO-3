@@ -1,5 +1,5 @@
-#ifndef PROJETO3_BIBLIOTECA_H
-#define PROJETO3_BIBLIOTECA_H
+#ifndef BIBLIOTECA_H
+#define BIBLIOTECA_H
 
 struct Contato {
     char nome[50];
