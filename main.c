@@ -2,8 +2,8 @@
 #include "biblioteca.h"
 
 int main() {
-    struct Contato lista_contatos[255]; // Array para armazenar os contatos
-    int total_contatos = 0; // Total de contatos atualmente na lista
+    struct Contato lista_contatos[255];
+    int total_contatos = 0;
     char opcao;
     char nome_arquivo[100];
 
@@ -23,13 +23,20 @@ int main() {
                 adicionar_contato(lista_contatos, &total_contatos);
                 break;
             case '2':
-                listar_contatos(lista_contatos, total_contatos);
+                if (total_contatos > 0)
+                    listar_contatos(lista_contatos, total_contatos);
+                else
+                    printf("\nA lista de contatos esta vazia.\n");
                 break;
             case '3':
-                printf("\nDigite o telefone do contato a ser deletado: ");
-                char telefone[15];
-                scanf("%s", telefone);
-                deletar_contato(lista_contatos, &total_contatos, telefone);
+                if (total_contatos > 0) {
+                    printf("\nDigite o telefone do contato a ser deletado: ");
+                    char telefone[15];
+                    scanf("%s", telefone);
+                    deletar_contato(lista_contatos, &total_contatos, telefone);
+                } else {
+                    printf("\nA lista de contatos esta vazia.\n");
+                }
                 break;
             case '4':
                 printf("\nDigite o nome do arquivo para salvar a agenda: ");
