@@ -4,6 +4,38 @@
 #include <stdlib.h>
 #include <ctype.h>
 
+int validar_email(const char *email) {
+    int i, atFound = 0;
+    int len = strlen(email);
+
+    // Verificar se o email possui pelo menos um caracter antes do '@'
+    if (len < 3)
+        return 0;
+
+    // Verificar se há apenas um '@'
+    for (i = 0; i < len; i++) {
+        if (email[i] == '@') {
+            if (atFound)
+                return 0; // Mais de um '@' encontrado
+            atFound = 1;
+        }
+    }
+    if (!atFound)
+        return 0; // Nenhum '@' encontrado
+
+    // Verificar se há pelo menos um caracter após o último '.' após o '@'
+    for (i = 0; i < len; i++) {
+        if (email[i] == '@') {
+            for (int j = i + 1; j < len - 1; j++) {
+                if (email[j] == '.')
+                    return 1; // Email válido
+            }
+            return 0; // Nenhum '.' encontrado após o '@'
+        }
+    }
+    return 0; // Caso de falha inesperada
+}
+
 void adicionar_contato(struct Contato lista_contatos[], int *total_contatos) {
     if (*total_contatos < 255) {
         printf("\nAdicionar Contato:\n");
@@ -17,8 +49,16 @@ void adicionar_contato(struct Contato lista_contatos[], int *total_contatos) {
         printf("Sobrenome: ");
         fgets(lista_contatos[*total_contatos].sobrenome, 50, stdin);
 
-        printf("Email: ");
-        fgets(lista_contatos[*total_contatos].email, 100, stdin);
+        // Obter e validar o email
+        int email_valido = 0;
+        while (!email_valido) {
+            printf("Email: ");
+            fgets(lista_contatos[*total_contatos].email, 100, stdin);
+            lista_contatos[*total_contatos].email[strcspn(lista_contatos[*total_contatos].email, "\n")] = 0; // Remover o caractere de nova linha do final
+            email_valido = validar_email(lista_contatos[*total_contatos].email);
+            if (!email_valido)
+                printf("Email invalido. Tente novamente.\n");
+        }
 
         // Obter telefone
         char telefone[15];
